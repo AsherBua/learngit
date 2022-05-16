@@ -107,4 +107,140 @@ d ={'mike':95, ’bob' : 40}
 ![image-20220512215307026](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220512215307026.png)
     **偏函数**
 functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。
+
+13. 模块
+    每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。
+    __init__.py可以是空文件，也可以有Python代码，因为__init__.py本身就是一个模块，而它的模块名就是mycompany。
+
+![image-20220512221247036](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220512221247036.png)
+
+其中if name == 'main'：这句估计很多和我一样的初学者都是不求甚解。 这里作一下解释：
+
+name是一个变量。前后加了爽下划线是因为是因为这是系统定义的名字。普通变量不要使用此方式命名变量。 2：Python有很多模块，而这些模块是可以独立运行的！这点不像C++和C的头文件。 3：import的时候是要执行所import的模块的。 4：name就是标识模块的名字的一个系统变量。这里分两种情况：假如当前模块是主模块（也就是调用其他模块的模块），那么此模块名字就是main，通过if判断这样就可以执行“mian:”后面的主函数内容；假如此模块是被import的，则此模块名字为文件名字（不加后面的.py），通过if判断这样就会跳过“mian:”后面的内容。
+
+通过上面方式，python就可以分清楚哪些是主函数，进入主函数执行；并且可以调用其他模块的各个函数等等。
     
+14. 面向对象编程
+
+__init__ 方法的主要作用,就是初始化你的属性
+![image-20220513105452458](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220513105452458.png)
+注意到`__init__`方法的第一个参数永远是`self`，表示创建的实例本身
+
+**访问限制**：在Python中，实例的变量名如果以_ _开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问
+def print_score(self):
+ print('%s: %s' % (self.__name, self.__score))
+
+![image-20220513113853998](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220513113853998.png)
+
+**继承和多态**
+isinstance(c, Dog) 可判断变量c,是否是类型Dog，的类型
+**获取对象信息**
+通过内置的一系列函数，我们可以对任意一个Python对象进行剖析，拿到其内部的数据。
+type(), isinstance(), dir(), 
+**给class，实例绑定属性，方法**
+
+![image-20220513152231952](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220513152231952.png)
+
+**使用__slots__**
+为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：
+
+![image-20220513152357429](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220513152357429.png)
+
+**使用@property**
+把一个getter方法变成属性，只需要加上@property就可以了。@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值
+
+![image-20220513173831051](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220513173831051.png)
+
+**定制类**
+__str__,__iter__
+__getitem__
+__getattr__
+__call__
+
+**枚举类**
+用Enum
+![image-20220514103424962](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514103424962.png)
+
+![image-20220514103443367](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514103443367.png)
+value属性则是自动赋给成员的int常量，默认从1开始计数
+
+@unique
+
+![image-20220514103752910](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514103752910.png)
+
+![image-20220514103819018](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514103819018.png)
+
+**type()**
+1. type()函数可以查看一个类型或变量的类型，Hello是一个class，它的类型就是type，而h是一个实例，它的类型就是class Hello
+    ![image-20220514110321651](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514110321651.png)
+    2.type()函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过type()函数创建出Hello类，而无需通过class Hello(object)...的定义
+
+  ![image-20220514110456965](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514110456965.png)
+
+**Python 字符串**
+1. 字符串是 Python 中最常用的数据类型。我们可以使用引号 ( ' 或 " ) 来创建字符串
+2. python 访问子字符串，可以使用方括号来截取字符串，如下实例：print "var1[0]: ", var1[0]
+3. 我们可以对字符串进行截取并与其他字符串进行连接，如下实例：print "输出 :- ", var1[:6] + 'Runoob!'
+4. Python 转义字符:
+![image-20220514111355329](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514111355329.png)
+5. Python字符串运算符:
+![image-20220514111440429](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514111440429.png)
+6. Python 字符串格式化:
+![image-20220514111525089](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514111525089.png)
+![image-20220514111558690](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514111558690.png)
+7. Python 三引号:
+Python 中三引号可以将复杂的字符串进行赋值。
+Python 三引号允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符。
+三引号的语法是一对连续的单引号或者双引号（通常都是成对的用）。
+![image-20220514111807027](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514111807027.png)
+
+**错误处理**
+try...except...finally...
+![image-20220514134745722](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514134745722.png)
+
+**调试**
+pdb，IDE调试
+**单元测试**
+**文档测试**
+用doctest测试：
+![image-20220514142740831](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514142740831.png)
+什么输出也没有。这说明我们编写的doctest运行都是正确的。如果程序有问题，比如把`__getattr__()`方法注释掉，再运行就会报错
+注意到最后3行代码。当模块正常导入时，doctest不会被执行。只有在命令行直接运行时，才执行doctest。所以，不必担心doctest会在非测试环境下执行。
+**文件读写**
+读：
+`with open('/path/to/file', 'r') as f:
+    print(f.read())`//无需调用f.close()
+如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便
+二进制文件: `f = open('/Users/michael/test.jpg', 'rb')`
+字符编码:要读取非UTF-8编码的文本文件，需要给open()函数传入encoding参数，例如，读取GBK编码的文件： `f = open('/Users/michael/gbk.txt', 'r', encoding='gbk')`
+遇到有些编码不规范的文件，你可能会遇到UnicodeDecodeError，因为在文本文件中可能夹杂了一些非法编码的字符。遇到这种情况，open()函数还接收一个errors参数，表示如果遇到编码错误后如何处理。最简单的方式是直接忽略：`f = open('/Users/michael/gbk.txt', 'r', encoding='gbk', errors='ignore')`
+写：
+`with open('/Users/michael/test.txt', 'w') as f:
+    f.write('Hello, world!')`
+如果我们希望追加到文件末尾怎么办？可以传入`'a'`以追加（append）模式写入。
+
+**StringIO:**
+StringIO顾名思义就是在内存中读写str。
+
+![image-20220514191729577](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514191729577.png)
+
+**BytesIO**
+StringIO操作的只能是str，如果要操作二进制数据，就需要使用BytesIO。
+StringIO和BytesIO是在内存中操作str和bytes的方法，使得和读写文件具有一致的接口。
+![image-20220514192404164](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514192404164.png)
+
+**操作文件和目录**
+
+![image-20220514194557362](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220514194557362.png)
+
+**序列化 python-JSON**
+如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，比如XML，但更好的方法是序列化为JSON，因为JSON表示出来就是一个字符串，可以被所有语言读取，也可以方便地存储到磁盘或者通过网络传输。JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。
+![image-20220515114018153](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220515114018153.png)
+
+![image-20220515115453094](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220515115453094.png)
+序列化class
+![image-20220515115717255](C:\Users\mbai1\AppData\Roaming\Typora\typora-user-images\image-20220515115717255.png)
+
+**进程和线程**(学到进程线程这里)
+1. 对于操作系统来说，一个任务就是一个进程（Process），比如打开一个浏览器就是启动一个浏览器进程，打开一个记事本就启动了一个记事本进程，打开两个记事本就启动了两个记事本进程，打开一个Word就启动了一个Word进程。
+2. 有些进程还不止同时干一件事，比如Word，它可以同时进行打字、拼写检查、打印等事情。在一个进程内部，要同时干多件事，就需要同时运行多个“子任务”，我们把进程内的这些“子任务”称为线程（Thread）。
